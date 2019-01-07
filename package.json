@@ -1,0 +1,41 @@
+{
+  "name": "iobroker.breezart",
+  "version": "1.0.0",
+  "description": "breezart",
+  "author": {
+    "name": "Andrey Putilov",
+    "email": "aputilov@hotmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Andrey Putilov",
+      "email": "aputilov@hotmail.com"
+    }
+  ],
+  "homepage": "https://github.com/ioBroker/ioBroker.breezart",
+  "license": "MIT",
+  "keywords": [
+    "ioBroker",
+    "breezart",
+    "Smart Home",
+    "home automation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ioBroker/ioBroker.breezart"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "gulp": "^4.0.0",
+    "mocha": "^4.1.0"
+  },
+  "main": "main.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha --exit"
+  },
+  "bugs": {
+    "url": "https://github.com/ioBroker/ioBroker.breezart/issues"
+  },
+  "readmeFilename": "README.md"
+}
