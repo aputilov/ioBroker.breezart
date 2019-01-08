@@ -35,7 +35,7 @@
 
 // you have to require the utils module and call adapter function
 const utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
-const Breezart = require("breezart-client"); //AP: Use breezart utility lib
+const Breezart = require('./lib/breezart-client'); //AP: Use breezart utility lib
 var HOST = '192.168.1.8'; //Вывести в параметры IOB
 var PORT = 1560; //Вывести в параметры IOB
 var device = new Breezart({ ip: HOST, password: 59513 }); //Вывести в параметры IOB
