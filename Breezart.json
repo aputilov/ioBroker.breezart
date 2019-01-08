@@ -1,0 +1,1852 @@
+[
+    {
+        "id": "4484ad27.bff564",
+        "type": "ioBroker in",
+        "z": "99a1edcb.6bb1",
+        "name": "CO2_BedRoom",
+        "topic": "netatmo.0.Netatmo.Спальня.CO2.CO2",
+        "payloadType": "value",
+        "onlyack": "",
+        "func": "all",
+        "gap": "",
+        "x": 320,
+        "y": 680,
+        "wires": [
+            [
+                "157afaf7.c32cd5"
+            ]
+        ]
+    },
+    {
+        "id": "e303fee7.27fd9",
+        "type": "ioBroker out",
+        "z": "99a1edcb.6bb1",
+        "name": "RotationSpeed",
+        "topic": "breezart.0.RotationSpeed",
+        "ack": "false",
+        "autoCreate": "false",
+        "x": 1620,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "4f08171a.f18ae8",
+        "type": "switch",
+        "z": "99a1edcb.6bb1",
+        "name": "CheckCO2",
+        "property": "$max(payload)",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "level2",
+                "vt": "flow"
+            },
+            {
+                "t": "gt",
+                "v": "level1",
+                "vt": "flow"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 947,
+        "y": 740,
+        "wires": [
+            [
+                "e83b0ac3.7d7548",
+                "34e17a0f.81bf56"
+            ],
+            [
+                "50ba9a58.a17ef4",
+                "8f15e8f6.fb5fc8"
+            ],
+            [
+                "21c3d88.efd6e28"
+            ]
+        ]
+    },
+    {
+        "id": "e83b0ac3.7d7548",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "SetSpeed_High",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "speed2",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1157,
+        "y": 680,
+        "wires": [
+            [
+                "6703ae3d.7cb51",
+                "8e0268e2.01da78"
+            ]
+        ]
+    },
+    {
+        "id": "21c3d88.efd6e28",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "SetSpeed_Low",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "speed0",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 820,
+        "wires": [
+            [
+                "8e0268e2.01da78",
+                "fb89fdb4.42a12"
+            ]
+        ]
+    },
+    {
+        "id": "66798763.03f088",
+        "type": "ioBroker in",
+        "z": "99a1edcb.6bb1",
+        "name": "CO2_Nika",
+        "topic": "netatmo.0.Netatmo.Ника.CO2.CO2",
+        "payloadType": "value",
+        "onlyack": "",
+        "func": "all",
+        "gap": "",
+        "x": 340,
+        "y": 740,
+        "wires": [
+            [
+                "157afaf7.c32cd5"
+            ]
+        ]
+    },
+    {
+        "id": "3546dba5.074ed4",
+        "type": "ioBroker in",
+        "z": "99a1edcb.6bb1",
+        "name": "CO2_Hall",
+        "topic": "netatmo.0.Netatmo.Гостинная.CO2.CO2",
+        "payloadType": "value",
+        "onlyack": "",
+        "func": "all",
+        "gap": "",
+        "x": 340,
+        "y": 800,
+        "wires": [
+            [
+                "157afaf7.c32cd5"
+            ]
+        ]
+    },
+    {
+        "id": "34e17a0f.81bf56",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 950,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "50ba9a58.a17ef4",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 950,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "ca2a615d.e7a42",
+        "type": "join",
+        "z": "99a1edcb.6bb1",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "10",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "$max(array)\t",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 767,
+        "y": 740,
+        "wires": [
+            [
+                "8f37c5b7.dda928",
+                "4f08171a.f18ae8",
+                "a7dfa8af.7e7e48",
+                "f8383e37.637a1"
+            ]
+        ]
+    },
+    {
+        "id": "8f37c5b7.dda928",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 767,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "6703ae3d.7cb51",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "Побольше",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1150,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "fb89fdb4.42a12",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "На минимум",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1150,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "157afaf7.c32cd5",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "parseInt-2",
+        "func": "msg.payload=parseInt(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 561,
+        "y": 740,
+        "wires": [
+            [
+                "ca2a615d.e7a42"
+            ]
+        ]
+    },
+    {
+        "id": "ef3b5e52.1036f",
+        "type": "ioBroker in",
+        "z": "99a1edcb.6bb1",
+        "name": "RotationSpeed",
+        "topic": "breezart.0.RotationSpeed",
+        "payloadType": "value",
+        "onlyack": "",
+        "func": "all",
+        "gap": "",
+        "x": 340,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7dfa8af.7e7e48",
+        "type": "trigger",
+        "z": "99a1edcb.6bb1",
+        "op1": "",
+        "op2": "1",
+        "op1type": "nul",
+        "op2type": "num",
+        "duration": "5",
+        "extend": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "name": "Если нет данных",
+        "x": 1150,
+        "y": 900,
+        "wires": [
+            [
+                "176d08b4.2219d7",
+                "8e0268e2.01da78"
+            ]
+        ]
+    },
+    {
+        "id": "176d08b4.2219d7",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "#НД",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1110,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "415e51ac.9c042",
+        "type": "inject",
+        "z": "99a1edcb.6bb1",
+        "name": "Для запуска триггера",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 900,
+        "y": 900,
+        "wires": [
+            [
+                "a7dfa8af.7e7e48"
+            ]
+        ]
+    },
+    {
+        "id": "ba5b1121.d1064",
+        "type": "switch",
+        "z": "99a1edcb.6bb1",
+        "name": "Ручной?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "4",
+                "vt": "str"
+            },
+            {
+                "t": "lte",
+                "v": "4",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 580,
+        "y": 520,
+        "wires": [
+            [
+                "a04c7d5.28e2f8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a04c7d5.28e2f8",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "ДА",
+        "rules": [
+            {
+                "t": "set",
+                "p": "manual",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 520,
+        "wires": [
+            [
+                "2c968846.ab1c68"
+            ]
+        ]
+    },
+    {
+        "id": "2c968846.ab1c68",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "РУЧНОЙ РЕЖИМ",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 750,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "42f60e42.6093c",
+        "type": "delay",
+        "z": "99a1edcb.6bb1",
+        "name": "Сброс руч. режима",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1740,
+        "y": 940,
+        "wires": [
+            [
+                "cf3bf784.5430c8"
+            ]
+        ]
+    },
+    {
+        "id": "cf3bf784.5430c8",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "ДА",
+        "rules": [
+            {
+                "t": "set",
+                "p": "manual",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1930,
+        "y": 940,
+        "wires": [
+            [
+                "eb7f78c0.27d548"
+            ]
+        ]
+    },
+    {
+        "id": "eb7f78c0.27d548",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "СБРОС РЕЖИМА",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1950,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "8e0268e2.01da78",
+        "type": "switch",
+        "z": "99a1edcb.6bb1",
+        "name": "РУЧНОЙ?",
+        "property": "manual",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1410,
+        "y": 720,
+        "wires": [
+            [
+                "4361f73b.11eef8"
+            ],
+            [
+                "c352c46.dc73e38",
+                "e303fee7.27fd9"
+            ]
+        ]
+    },
+    {
+        "id": "4361f73b.11eef8",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "Ручной",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1600,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "8b5aef57.797ab",
+        "type": "inject",
+        "z": "99a1edcb.6bb1",
+        "name": "ПРОБА",
+        "topic": "",
+        "payload": "5",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 330,
+        "y": 540,
+        "wires": [
+            [
+                "ba5b1121.d1064"
+            ]
+        ]
+    },
+    {
+        "id": "c352c46.dc73e38",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "Устанавливаем",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1620,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "e7d2a9ce.a39818",
+        "type": "inject",
+        "z": "99a1edcb.6bb1",
+        "name": "",
+        "topic": "",
+        "payload": "1001",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 290,
+        "y": 620,
+        "wires": [
+            [
+                "157afaf7.c32cd5"
+            ]
+        ]
+    },
+    {
+        "id": "8f15e8f6.fb5fc8",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "SetSpeed_Mid",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "speed1",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 740,
+        "wires": [
+            [
+                "dbbb1086.d886c",
+                "8e0268e2.01da78"
+            ]
+        ]
+    },
+    {
+        "id": "dbbb1086.d886c",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "Средняя",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1140,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "1c09c50c.74d60b",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "GetLocation",
+        "func": "\nvar home_long = 37.7012;\nvar home_alt = 55.8194;\n\n//var values = flow.get([\"latitude\", \"longitude\"]);\n \nvar long_target = 0; \nvar alt_target = 0;\n\nlong_target = parseFloat(flow.get('LO'));// values[1];\nalt_target = parseFloat(flow.get('LA'));\n//node.log(long_target);\n//node.log(alt_target);\n\n\nmsg.payload = 6371*1000*Math.acos(Math.sin(Math.PI*home_alt/180)*Math.sin(Math.PI*alt_target/180)+Math.cos(Math.PI*home_alt/180)*Math.cos(Math.PI*alt_target/180)*Math.cos(Math.PI*(home_long-long_target)/180));\n// вывод в лог расстояния в метрах\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 690,
+        "y": 260,
+        "wires": [
+            [
+                "6b23990b.f116c8",
+                "8463323b.2fe1"
+            ]
+        ]
+    },
+    {
+        "id": "6b23990b.f116c8",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "Расстояние",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 870,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "282f31cf.40579e",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "Set LA.",
+        "rules": [
+            {
+                "t": "set",
+                "p": "LA",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 240,
+        "wires": [
+            [
+                "1c09c50c.74d60b",
+                "642dcb16.a76cb4"
+            ]
+        ]
+    },
+    {
+        "id": "eed8108f.ea0d9",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "SET LO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "LO",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 280,
+        "wires": [
+            [
+                "1c09c50c.74d60b",
+                "c013725a.bbb22"
+            ]
+        ]
+    },
+    {
+        "id": "642dcb16.a76cb4",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "LA",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 510,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c013725a.bbb22",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "LO",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 510,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "e7628b0a.cbcc18",
+        "type": "ioBroker get",
+        "z": "99a1edcb.6bb1",
+        "name": "latitude",
+        "topic": "find-my-iphone.0.iPhone_(Andrey).latitude",
+        "attrname": "payload",
+        "payloadType": "value",
+        "x": 340,
+        "y": 240,
+        "wires": [
+            [
+                "282f31cf.40579e"
+            ]
+        ]
+    },
+    {
+        "id": "452ba365.3c988c",
+        "type": "ioBroker get",
+        "z": "99a1edcb.6bb1",
+        "name": "longitude",
+        "topic": "find-my-iphone.0.iPhone_(Andrey).longitude",
+        "attrname": "payload",
+        "payloadType": "value",
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "eed8108f.ea0d9"
+            ]
+        ]
+    },
+    {
+        "id": "5e3ac9eb.238b68",
+        "type": "trigger",
+        "z": "99a1edcb.6bb1",
+        "op1": "60",
+        "op2": "1",
+        "op1type": "num",
+        "op2type": "str",
+        "duration": "-10",
+        "extend": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 170,
+        "y": 240,
+        "wires": [
+            [
+                "e7628b0a.cbcc18",
+                "452ba365.3c988c"
+            ]
+        ]
+    },
+    {
+        "id": "1bc2b34.ef3094d",
+        "type": "inject",
+        "z": "99a1edcb.6bb1",
+        "name": "",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "5e3ac9eb.238b68"
+            ]
+        ]
+    },
+    {
+        "id": "601e79b8.041d08",
+        "type": "ioBroker out",
+        "z": "99a1edcb.6bb1",
+        "name": "Power",
+        "topic": "breezart.0.Power",
+        "ack": "false",
+        "autoCreate": "false",
+        "x": 450,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c32e858e.ed3568",
+        "type": "inject",
+        "z": "99a1edcb.6bb1",
+        "name": "ВКЛ",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 290,
+        "y": 40,
+        "wires": [
+            [
+                "601e79b8.041d08"
+            ]
+        ]
+    },
+    {
+        "id": "e4339e3d.7f0af",
+        "type": "inject",
+        "z": "99a1edcb.6bb1",
+        "name": "ВЫКЛ",
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 290,
+        "y": 120,
+        "wires": [
+            [
+                "601e79b8.041d08"
+            ]
+        ]
+    },
+    {
+        "id": "bd6b7cfb.bebd",
+        "type": "e-mail",
+        "z": "99a1edcb.6bb1",
+        "server": "smtp.mail.ru",
+        "port": "465",
+        "secure": true,
+        "name": "aputilov@hotmail.com",
+        "dname": "",
+        "x": 1140,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8463323b.2fe1",
+        "type": "switch",
+        "z": "99a1edcb.6bb1",
+        "name": "Если отъехал",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "1000",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 900,
+        "y": 260,
+        "wires": [
+            [
+                "bd6b7cfb.bebd"
+            ]
+        ]
+    },
+    {
+        "id": "6929c18e.15172",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "parseInt",
+        "func": "msg.payload=parseInt(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1200,
+        "y": 120,
+        "wires": [
+            [
+                "6dadd4f1.12708c",
+                "35b5a4c1.6935cc"
+            ]
+        ]
+    },
+    {
+        "id": "6dadd4f1.12708c",
+        "type": "switch",
+        "z": "99a1edcb.6bb1",
+        "name": "Если отъехал",
+        "property": "msg.payload != flow.oldgeo",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1380,
+        "y": 120,
+        "wires": [
+            [
+                "bd6b7cfb.bebd",
+                "64674a2f.49fc14",
+                "512dec73.75b6f4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e7399078.082e3",
+        "type": "ioBroker get",
+        "z": "99a1edcb.6bb1",
+        "name": "atHomeCount",
+        "topic": "geofency.0.atHomeCount",
+        "attrname": "payload",
+        "payloadType": "value",
+        "x": 1020,
+        "y": 120,
+        "wires": [
+            [
+                "6929c18e.15172"
+            ]
+        ]
+    },
+    {
+        "id": "aec9ad30.03f34",
+        "type": "trigger",
+        "z": "99a1edcb.6bb1",
+        "op1": "60",
+        "op2": "1",
+        "op1type": "num",
+        "op2type": "str",
+        "duration": "-10",
+        "extend": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 810,
+        "y": 120,
+        "wires": [
+            [
+                "e7399078.082e3"
+            ]
+        ]
+    },
+    {
+        "id": "5a3c9b8f.955ec4",
+        "type": "inject",
+        "z": "99a1edcb.6bb1",
+        "name": "",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 630,
+        "y": 120,
+        "wires": [
+            [
+                "aec9ad30.03f34"
+            ]
+        ]
+    },
+    {
+        "id": "35b5a4c1.6935cc",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "Есть кто дома?",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1380,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "64674a2f.49fc14",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "Set Old",
+        "rules": [
+            {
+                "t": "set",
+                "p": "oldgeo",
+                "pt": "flow",
+                "to": "playload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1600,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "512dec73.75b6f4",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "ВЫКЛ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1590,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "16aa7f6a.0f6771",
+        "type": "ui_switch",
+        "z": "99a1edcb.6bb1",
+        "name": "Ручной режим",
+        "label": "Ручной режим",
+        "group": "7cfa097e.219be8",
+        "order": 4,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "Ручной режим",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 1240,
+        "y": 1080,
+        "wires": [
+            [
+                "d6273cd3.0065c"
+            ]
+        ]
+    },
+    {
+        "id": "96de416c.528a3",
+        "type": "ui_slider",
+        "z": "99a1edcb.6bb1",
+        "name": "Скорость",
+        "label": "Скорость",
+        "group": "7cfa097e.219be8",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "outs": "end",
+        "topic": "Скорость",
+        "min": "1",
+        "max": "8",
+        "step": 1,
+        "x": 1260,
+        "y": 1120,
+        "wires": [
+            [
+                "e303fee7.27fd9",
+                "c352c46.dc73e38",
+                "2862064d.fb325a"
+            ]
+        ]
+    },
+    {
+        "id": "ba702146.7e6aa",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "Скорость текущая: ",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 390,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "4708a908.9046f8",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "parseInt-2",
+        "func": "msg.payload=parseInt(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 360,
+        "y": 1120,
+        "wires": [
+            [
+                "96de416c.528a3",
+                "ba702146.7e6aa",
+                "6fafd6bb.8b71b8"
+            ]
+        ]
+    },
+    {
+        "id": "44966a4d.615274",
+        "type": "ioBroker get",
+        "z": "99a1edcb.6bb1",
+        "name": "RotationSpeed",
+        "topic": "breezart.0.RotationSpeed",
+        "attrname": "payload",
+        "payloadType": "value",
+        "x": 360,
+        "y": 1160,
+        "wires": [
+            [
+                "4708a908.9046f8"
+            ]
+        ]
+    },
+    {
+        "id": "9afcfade.e28458",
+        "type": "inject",
+        "z": "99a1edcb.6bb1",
+        "name": "flow.manual",
+        "topic": "",
+        "payload": "flow.manual",
+        "payloadType": "env",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 970,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1d2dee9d.9f47b1",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "Установить режим",
+        "rules": [
+            {
+                "t": "set",
+                "p": "manual",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1590,
+        "y": 1080,
+        "wires": [
+            [
+                "70aac9f3.f16238"
+            ]
+        ]
+    },
+    {
+        "id": "70aac9f3.f16238",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "УСТ РУЧНОЙ РЕЖИМ",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1870,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "64b2a732.2ce248",
+        "type": "inject",
+        "z": "99a1edcb.6bb1",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "num",
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 330,
+        "y": 1220,
+        "wires": [
+            [
+                "44966a4d.615274",
+                "7f0c2796.bf67c8",
+                "e2f98e42.d1d55",
+                "692cba5c.3db7c4",
+                "4127facb.2df4f4",
+                "8cd3da48.0a7b78",
+                "9d43b661.1aa528",
+                "6c444ab5.0b4854"
+            ]
+        ]
+    },
+    {
+        "id": "2ee5073e.2b1788",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1230,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "7f0c2796.bf67c8",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "Ручной?",
+        "func": "msg.payload = flow.get('manual');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1020,
+        "y": 1080,
+        "wires": [
+            [
+                "16aa7f6a.0f6771",
+                "2ee5073e.2b1788"
+            ]
+        ]
+    },
+    {
+        "id": "e2f98e42.d1d55",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "Задержка",
+        "func": "msg.payload = flow.get('delay');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1020,
+        "y": 1180,
+        "wires": [
+            [
+                "ca30cb0.22ed638"
+            ]
+        ]
+    },
+    {
+        "id": "35b16b7c.30ef44",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "Установить задержку",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1440,
+        "y": 1180,
+        "wires": [
+            [
+                "b398c030.778c4"
+            ]
+        ]
+    },
+    {
+        "id": "17709b07.f470e5",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "Уст задержки",
+        "func": "var del = flow.get('delay');\nif ( del > 0 ) {    \n    del = del * 60 * 1000; } else {\n    del = 60 * 60 * 24 * 1000\n} //сутки\nmsg.delay = del ;\nmsg.payload = msg.delay;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1720,
+        "y": 1000,
+        "wires": [
+            [
+                "42f60e42.6093c"
+            ]
+        ]
+    },
+    {
+        "id": "b398c030.778c4",
+        "type": "debug",
+        "z": "99a1edcb.6bb1",
+        "name": "УСТ ЗАДЕРЖКУ",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1730,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "bc47e5a5.f32a28",
+        "type": "ui_numeric",
+        "z": "99a1edcb.6bb1",
+        "name": "Порог 1",
+        "label": "Порог 1",
+        "group": "7cfa097e.219be8",
+        "order": 8,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "topic": "Порог 1",
+        "format": "{{value}}",
+        "min": "400",
+        "max": "1200",
+        "step": "100",
+        "x": 1260,
+        "y": 1323,
+        "wires": [
+            [
+                "c5d668b0.3857f8"
+            ]
+        ]
+    },
+    {
+        "id": "d38b0fc8.f39d8",
+        "type": "ui_numeric",
+        "z": "99a1edcb.6bb1",
+        "name": "Порог 2",
+        "label": "Порог 2",
+        "group": "7cfa097e.219be8",
+        "order": 10,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "topic": "Порог 2",
+        "format": "{{value}}",
+        "min": "400",
+        "max": "1200",
+        "step": "100",
+        "x": 1260,
+        "y": 1432,
+        "wires": [
+            [
+                "8a59bd40.8f34b"
+            ]
+        ]
+    },
+    {
+        "id": "c5d668b0.3857f8",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "Установить порог 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "level1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1440,
+        "y": 1323,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8a59bd40.8f34b",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "Установить порог 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "level2",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1440,
+        "y": 1432,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "692cba5c.3db7c4",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "Порог 1",
+        "func": "msg.payload = flow.get('level1');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1020,
+        "y": 1323,
+        "wires": [
+            [
+                "bc47e5a5.f32a28"
+            ]
+        ]
+    },
+    {
+        "id": "4127facb.2df4f4",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "Порог 2",
+        "func": "msg.payload = flow.get('level2');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1020,
+        "y": 1432,
+        "wires": [
+            [
+                "d38b0fc8.f39d8"
+            ]
+        ]
+    },
+    {
+        "id": "8cd3da48.0a7b78",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "Скорость 1",
+        "func": "msg.payload = flow.get('speed1');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1030,
+        "y": 1371,
+        "wires": [
+            [
+                "94a8c556.a40d58"
+            ]
+        ]
+    },
+    {
+        "id": "94a8c556.a40d58",
+        "type": "ui_numeric",
+        "z": "99a1edcb.6bb1",
+        "name": "Скорость 1",
+        "label": "Скорость",
+        "group": "7cfa097e.219be8",
+        "order": 9,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "topic": "Скорость 1",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "8",
+        "step": "1",
+        "x": 1270,
+        "y": 1371,
+        "wires": [
+            [
+                "b661355c.7deb68"
+            ]
+        ]
+    },
+    {
+        "id": "b661355c.7deb68",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "Установить скорость 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "speed1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1470,
+        "y": 1371,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9d43b661.1aa528",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "Скорость 2",
+        "func": "msg.payload = flow.get('speed2');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1030,
+        "y": 1478,
+        "wires": [
+            [
+                "6c44bd7c.dc70b4"
+            ]
+        ]
+    },
+    {
+        "id": "6c44bd7c.dc70b4",
+        "type": "ui_numeric",
+        "z": "99a1edcb.6bb1",
+        "name": "Скорость 2",
+        "label": "Скорость",
+        "group": "7cfa097e.219be8",
+        "order": 11,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "topic": "Скорость 2",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "8",
+        "step": "1",
+        "x": 1270,
+        "y": 1478,
+        "wires": [
+            [
+                "923abf1.408d34"
+            ]
+        ]
+    },
+    {
+        "id": "923abf1.408d34",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "Установить скорость 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "speed2",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1470,
+        "y": 1478,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c444ab5.0b4854",
+        "type": "function",
+        "z": "99a1edcb.6bb1",
+        "name": "Скорость 0",
+        "func": "msg.payload = flow.get('speed0');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1030,
+        "y": 1272,
+        "wires": [
+            [
+                "ae012492.ca4778"
+            ]
+        ]
+    },
+    {
+        "id": "ae012492.ca4778",
+        "type": "ui_numeric",
+        "z": "99a1edcb.6bb1",
+        "name": "Скорость 0",
+        "label": "Скорость",
+        "group": "7cfa097e.219be8",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "topic": "Скорость 0",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "8",
+        "step": "1",
+        "x": 1270,
+        "y": 1272,
+        "wires": [
+            [
+                "fe8bc279.9f0ee"
+            ]
+        ]
+    },
+    {
+        "id": "fe8bc279.9f0ee",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "Установить скорость 0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "speed0",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1470,
+        "y": 1272,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6fafd6bb.8b71b8",
+        "type": "ui_text",
+        "z": "99a1edcb.6bb1",
+        "group": "7cfa097e.219be8",
+        "order": 2,
+        "width": "1",
+        "height": "1",
+        "name": "Скорость",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1120,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "2862064d.fb325a",
+        "type": "change",
+        "z": "99a1edcb.6bb1",
+        "name": "Ручной режим",
+        "rules": [
+            {
+                "t": "set",
+                "p": "manual",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 1120,
+        "wires": [
+            [
+                "17709b07.f470e5"
+            ]
+        ]
+    },
+    {
+        "id": "d6273cd3.0065c",
+        "type": "switch",
+        "z": "99a1edcb.6bb1",
+        "name": "Ручной?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1400,
+        "y": 1080,
+        "wires": [
+            [
+                "1d2dee9d.9f47b1",
+                "17709b07.f470e5"
+            ],
+            [
+                "1d2dee9d.9f47b1"
+            ]
+        ]
+    },
+    {
+        "id": "f8383e37.637a1",
+        "type": "ui_text",
+        "z": "99a1edcb.6bb1",
+        "group": "7cfa097e.219be8",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "Текущие значения СО2 NETATMO",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 700,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "fd4db157.e62f2",
+        "type": "ui_numeric",
+        "z": "99a1edcb.6bb1",
+        "name": "Порог 0",
+        "label": "Порог 0",
+        "group": "7cfa097e.219be8",
+        "order": 6,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "topic": "Порог 0",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "0",
+        "step": "0",
+        "x": 1260,
+        "y": 1225,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ca30cb0.22ed638",
+        "type": "ui_numeric",
+        "z": "99a1edcb.6bb1",
+        "name": "Задержка",
+        "label": "Задержка",
+        "group": "7cfa097e.219be8",
+        "order": 5,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "topic": "Задержка",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "8",
+        "step": "1",
+        "x": 1260,
+        "y": 1180,
+        "wires": [
+            [
+                "35b16b7c.30ef44"
+            ]
+        ]
+    },
+    {
+        "id": "7cfa097e.219be8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Пульт",
+        "tab": "d3d9c016.1f731",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "d3d9c016.1f731",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Пуль управления",
+        "icon": "home",
+        "order": 2
+    }
+]
